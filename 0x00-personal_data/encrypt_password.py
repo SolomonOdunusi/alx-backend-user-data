@@ -5,10 +5,10 @@ import hashlib
 import base64
 
 
-def hash_password(password):
+def hash_password(password: str) -> bytes:
     """Encrypts a password using bcrypt and sha256"""
     hashed = bcrypt.hashpw(hashlib.sha256(
-        password.encode("utf-8")).digest(), bcrypt.gensalt())
+        password.encode()).digest(), bcrypt.gensalt())
     return hashed
 
 
