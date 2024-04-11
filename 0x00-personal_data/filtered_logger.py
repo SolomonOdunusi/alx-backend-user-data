@@ -16,13 +16,13 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     password = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
     host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
     database = os.environ.get('PERSONAL_DATA_DB_NAME')
-    connector = mysql.connector.connect(
+    mydb = mysql.connector.connect(
         user=user,
         password=password,
         host=host,
         database=database
     )
-    return connector
+    return mydb
 
 
 class RedactingFormatter(logging.Formatter):
