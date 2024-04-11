@@ -13,10 +13,10 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     Returns a connector to a MySQL database
     """
     connector = mysql.connector.connect(
-        user = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
-        password = os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
-        host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
-        database = os.getenv('PERSONAL_DATA_DB_NAME')
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.getenv('PERSONAL_DATA_DB_NAME')
     )
     return connector
 
@@ -42,12 +42,15 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """
     Returns the log message obfuscated
     """
     for field in fields:
-        message = re.sub(rf'{field}=(.*?){separator}', f'{field}={redaction}{separator}', message)
+        message = re.sub(rf'{field}=(.*?){separator}',
+                         f'{field}={redaction}{separator}', message)
     return message
 
 
