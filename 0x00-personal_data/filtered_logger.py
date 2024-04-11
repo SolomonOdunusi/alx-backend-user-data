@@ -12,17 +12,17 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     Returns a connector to a MySQL database
     """
-    user = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
-    password = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
-    host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
-    database = os.environ.get('PERSONAL_DATA_DB_NAME')
-    mydb = mysql.connector.connect(
+    user = os.environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    password = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+    host = os.environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = os.environ.get("PERSONAL_DATA_DB_NAME")
+    myDB = mysql.connector.connect(
         user=user,
         password=password,
         host=host,
-        database=database
+        database=db_name
     )
-    return mydb
+    return myDB
 
 
 class RedactingFormatter(logging.Formatter):
