@@ -42,3 +42,15 @@ def forbidden() -> str:
       - abort(403)
     """
     abort(403)
+
+
+@app_views.route('/stats/', methods=['GET'], strict_slashes=False)
+def stats() -> str:
+    """ GET /api/v1/stats
+    Return:
+      - the number of each objects
+    """
+    from models.user import User
+    stats = {}
+    stats['users'] = User.count()
+    return jsonify(stats)
